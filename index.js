@@ -1,3 +1,4 @@
+const fieldList = document.querySelectorAll('.field')
 const markerBtnX = document.getElementById('x')
 const markerBtnO = document.getElementById('o')
 let selectedMarker;
@@ -43,7 +44,6 @@ const gameBoardDisplay = (() => {
         markerBtnX.classList.remove('active')
     })
     
-    const fieldList = document.querySelectorAll('.field')
     fieldList.forEach(field => {
         field.addEventListener('click', () => {
             field.textContent = selectedMarker
