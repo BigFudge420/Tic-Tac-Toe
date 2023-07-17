@@ -110,7 +110,7 @@ body{
     color: white;
 }
 
-.reset{
+.buttons{
     width: 300px;
     display: flex;
     justify-content: center;

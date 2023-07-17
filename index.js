@@ -77,17 +77,17 @@ const Gameboard = (() => {
 
 
 const GameController = (()=> {
-    let player1 = Player('Player 1', 'X')
-    let player2 = Player('Player 2', 'O')
+    let playerX = Player('Player X', 'X')
+    let playerO = Player('Player O', 'O')
     gameOver = false;
-    currentPlayer = player1
+    currentPlayer = playerX
     
     const switchTurn = () => {
-        if (currentPlayer === player1){
-            currentPlayer = player2
+        if (currentPlayer === playerX){
+            currentPlayer = playerO
         } 
         else {
-            currentPlayer = player1
+            currentPlayer = playerX
         }
     }
     
@@ -155,7 +155,7 @@ const GameController = (()=> {
         gameOver = false;
       };
 
-      return {start, reset, player1, player2}
+      return {start, reset, playerX, playerO}
 })()
 
 const resetGame = (() => {
