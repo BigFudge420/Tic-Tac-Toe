@@ -2,8 +2,19 @@ const fieldList = document.querySelectorAll('.field')
 const markerBtnX = document.getElementById('x')
 const markerBtnO = document.getElementById('o')
 const resetBtn = document.getElementById('resetBtn')
+const popupTitle = document.querySelector('.popupTitle')
+const popupBody = document.querySelector('.popupBody')
+const resultPopup = document.querySelector('.resultPopup')
+const closePopup = document.querySelector('.closeButton')
+const overlay = document.getElementById('overlay')
 let currentPlayer;
 let selectedMarker;
+
+closePopup.addEventListener('click', () => {
+    resultPopup.classList.remove('active')
+    overlay.classList.remove('active')
+})
+
 
 const gameBoardDisplay = (() => {
     
@@ -109,11 +120,17 @@ const GameController = (()=> {
         
         if (Gameboard.updateBoard(index, currentPlayer.marker)){
             if (checkWin(currentPlayer.marker)){
-                alert(`${currentPlayer.playerName} wins!`)
+                resultPopup.classList.add('active')
+                overlay.classList.add('active')
+                popupTitle.textContent = "Victory!!!"
+                popupBody.textContent = `${currentPlayer.playerName}'s strategic moves and cunning gameplay have paid off, and they have emerged as the ultimate champion. The opponent was no match for ${currentPlayer.playerName}'s skill and determination. Enjoy this well-deserved victory, and revel in the glory of your triumph! Well done!`
                 gameOver = true
             }
             else if (!Gameboard.getBoard().includes("")){
-                alert('Its a tie')
+                resultPopup.classList.add('active')
+                overlay.classList.add('active')
+                popupTitle.textContent = "It's a tie..."
+                popupBody.textContent = "Both players have displayed exceptional skill and strategic brilliance throughout the game of Tic Tac Toe. Every move was met with a countermove, and neither player could secure a definitive victory. This hard-fought battle ends in a draw, proving that both of you are true contenders. Take pride in your performance, as you've proven yourself a worthy adversary. Well played!"
                 gameOver = true
             }
             else {
