@@ -1,15 +1,21 @@
 #gameBoard{
     width: 350px;
     height: auto;
+    display: grid;
+    grid-template-columns: repeat(3,100px);
+    grid-template-rows: repeat(3,100px);
 }
 
 .field{
-    margin: 0px -2px;
-    width: 100px;
-    height: 100px;
+    margin: 0px;
     appearance: none;
     border: none;
     background: none;
+}
+
+.field.p{
+    padding: 0px;
+    margin: 0px;
 }
 
 .no-l-t{
