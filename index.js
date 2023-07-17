@@ -31,11 +31,11 @@ const gameBoardDisplay = (() => {
         
     fieldList.forEach(field => {
         field.addEventListener('click', () => {
+            let index = field.getAttribute('data-field')
             if (!gameOver){
-                field.textContent = currentPlayer.marker
-                console.log(currentPlayer.name)
-                console.log(Gameboard.getBoard())
-                console.log(`The current player uses the ${currentPlayer.marker} marker`)
+                if (Gameboard.getBoard()[index] === ""){
+                    field.textContent = currentPlayer.marker
+                }
             }
         })
     })
@@ -75,7 +75,6 @@ const Gameboard = (() => {
     
 })()
 
-
 const GameController = (()=> {
     let playerX = Player('Player X', 'X')
     let playerO = Player('Player O', 'O')
@@ -108,7 +107,6 @@ const GameController = (()=> {
             [0, 4, 8],
             [2, 4, 6]
         ]
-        console.log('Checking')
 
         return winningCombinations.some((combination) => {
             return combination.every((index) => {
@@ -148,7 +146,6 @@ const GameController = (()=> {
     }
 
     const reset = () => {
-        console.log('RESET!!!')
         Gameboard.resetBoard();
         gameBoardDisplay.clearBoard();
         currentPlayer = playerX;
