@@ -59,12 +59,13 @@ const Gameboard = (() => {
     
 })()
 
+
 const GameController = (()=> {
     let player1 = Player('Player 1', 'X')
     let player2 = Player('Player 2', 'O')
     let gameOver = false;
     currentPlayer = player1
-
+    
     const switchTurn = () => {
         if (currentPlayer === player1){
             currentPlayer = player2
@@ -73,7 +74,13 @@ const GameController = (()=> {
             currentPlayer = player1
         }
     }
-
+    
+    const endGame = () => {
+        if (gameOver){
+            
+        }
+    }
+    
     const checkWin = (marker) => {
         const winningCombinations = [
             [0, 1, 2],

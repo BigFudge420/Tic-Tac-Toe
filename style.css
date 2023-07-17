@@ -4,6 +4,10 @@ body{
     justify-content: center;
 }
 
+.container{
+    padding: 50px;
+}
+
 #gameBoard{
     width: 350px;
     height: auto;
@@ -90,6 +94,11 @@ body{
     text-align: center;
     border-radius: 10px;
     width: 100px;
+    transform: scale(0);
+}
+
+.markerDiv.enable{
+    transform: scale(1);
 }
 
 .markerDiv:hover{
@@ -99,4 +108,34 @@ body{
 .markerDiv.active{
     background-color: black;
     color: white;
+}
+
+.reset{
+    width: 300px;
+    display: flex;
+    justify-content: center;
+}
+
+#resetBtn{
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: white;
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: 50px;
+    width: 200px;
+    height: 40px;
+}
+
+#resetBtn:hover{
+    box-shadow: 2px 2px 5px black;
+}
+
+.title{
+    display: flex;
+    font-size: 25px;
+    justify-content: center;
+    width: 300px;
+    margin-top: -40px;
+    margin-bottom: 30px;
 }
