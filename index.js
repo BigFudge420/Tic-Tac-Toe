@@ -7,6 +7,7 @@ const popupBody = document.querySelector('.popupBody')
 const resultPopup = document.querySelector('.resultPopup')
 const closePopup = document.querySelector('.closeButton')
 const overlay = document.getElementById('overlay')
+let gameOver = false;
 let currentPlayer;
 let selectedMarker;
 
@@ -30,11 +31,12 @@ const gameBoardDisplay = (() => {
         
     fieldList.forEach(field => {
         field.addEventListener('click', () => {
-            field.textContent = currentPlayer.marker
-            let index = field.getAttribute('data-field')
-            console.log(currentPlayer.name)
-            console.log(Gameboard.getBoard())
-            console.log(`The current player uses the ${currentPlayer.marker} marker`)
+            if (!gameOver){
+                field.textContent = currentPlayer.marker
+                console.log(currentPlayer.name)
+                console.log(Gameboard.getBoard())
+                console.log(`The current player uses the ${currentPlayer.marker} marker`)
+            }
         })
     })
 
@@ -58,7 +60,7 @@ const Gameboard = (() => {
     const getBoard = () => board
     
     const updateBoard = (index, marker) => {
-        if (index >= 0 && index < board.length && board[index] === ""){
+        if (index >= 0 && index < board.length && board[index] === "" && !gameOver){
             board[index] = marker
             return true
         }
@@ -77,7 +79,7 @@ const Gameboard = (() => {
 const GameController = (()=> {
     let player1 = Player('Player 1', 'X')
     let player2 = Player('Player 2', 'O')
-    let gameOver = false;
+    gameOver = false;
     currentPlayer = player1
     
     const switchTurn = () => {
@@ -118,7 +120,7 @@ const GameController = (()=> {
     const handleClick = (e) => {
         let index = e.target.getAttribute('data-field')
         
-        if (Gameboard.updateBoard(index, currentPlayer.marker)){
+        if (Gameboard.updateBoard(index, currentPlayer.marker) && !gameOver){
             if (checkWin(currentPlayer.marker)){
                 resultPopup.classList.add('active')
                 overlay.classList.add('active')
