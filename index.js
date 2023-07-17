@@ -1,6 +1,7 @@
 const fieldList = document.querySelectorAll('.field')
 const markerBtnX = document.getElementById('x')
 const markerBtnO = document.getElementById('o')
+const resetBtn = document.getElementById('resetBtn')
 let currentPlayer;
 let selectedMarker;
 
@@ -31,6 +32,8 @@ const gameBoardDisplay = (() => {
             field.textContent = ''
         })
     }
+
+    return {clearBoard}
 
 })()
 
@@ -126,13 +129,18 @@ const GameController = (()=> {
     }
 
     const reset = () => {
+        console.log('RESET!!!')
         Gameboard.resetBoard();
-        displayController.clearBoard();
+        gameBoardDisplay.clearBoard();
         currentPlayer = player1;
         gameOver = false;
       };
 
       return {start, reset, player1, player2}
+})()
+
+const resetGame = (() => {
+    resetBtn.addEventListener('click', GameController.reset)
 })()
 
 
