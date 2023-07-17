@@ -1,0 +1,61 @@
+#gameBoard{
+    width: 350px;
+    height: auto;
+}
+
+.field{
+    margin: 0px -2px;
+    width: 100px;
+    height: 100px;
+    appearance: none;
+    border: none;
+    background: none;
+}
+
+.no-l-t{
+    border-right: 3px solid black;
+    border-bottom: 3px solid black;
+}
+
+.no-t{
+    border-right: 3px solid black;
+    border-bottom: 3px solid black;
+    border-left:3px solid black;
+}
+
+.no-r-t{
+    border-left: 3px solid black;
+    border-bottom: 3px solid black;    
+}
+
+.no-l{
+    border-right: 3px solid black;
+    border-bottom: 3px solid black;
+    border-top: 3px solid black;
+}
+
+.all{
+    border: 3px solid black;
+}
+
+.no-r{
+    border-left: 3px solid black;
+    border-bottom: 3px solid black;
+    border-top: 3px solid black;
+}
+
+.no-l-b{
+    border-right: 3px solid black;
+    border-top: 3px solid black;
+}
+
+.no-b{
+    border-left: 3px solid black;
+    border-top: 3px solid black;
+    border-right: 3px solid black;
+}
+
+.no-r-b{
+    border-left: 3px solid black;
+    border-top: 3px solid black;
+}
