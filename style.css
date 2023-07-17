@@ -95,3 +95,7 @@ body{
 .markerDiv:hover{
     background-color: rgb(230, 224, 224);
 }
+
+.markerDiv.active{
+    background-color: rgb(158, 152, 152);
+}
