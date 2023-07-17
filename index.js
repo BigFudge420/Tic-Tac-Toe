@@ -151,7 +151,7 @@ const GameController = (()=> {
         console.log('RESET!!!')
         Gameboard.resetBoard();
         gameBoardDisplay.clearBoard();
-        currentPlayer = player1;
+        currentPlayer = playerX;
         gameOver = false;
       };
 
