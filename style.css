@@ -17,6 +17,8 @@ body{
     appearance: none;
     border: none;
     background: none;
+    font-weight: 1000;
+    font-size: 35px;
 }
 
 .field.p{
