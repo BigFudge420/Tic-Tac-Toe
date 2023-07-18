@@ -84,12 +84,6 @@ const GameController = (()=> {
         }
     }
     
-    const endGame = () => {
-        if (gameOver){
-            
-        }
-    }
-    
     const checkWin = (marker) => {
         const winningCombinations = [
             [0, 1, 2],
