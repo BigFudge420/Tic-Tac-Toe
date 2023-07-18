@@ -13,14 +13,14 @@ homePageBtn.addEventListener('click', () => {
 })
 
 resetBtn.addEventListener('click', () => {
-    gameBoardDisplay.clearBoard()
-    Gameboard.resetBoard();
+    GameController.reset()
 })
 
 markerBtnX.addEventListener('click', () => {
     playerMarker = 'X'
     computerMarker = 'O'
     currentPlayer = GameController.humanPlayer
+    console.log(computerMarker)
     markerBtnX.classList.add('active')
     markerBtnO.classList.remove('active')
 })
@@ -38,6 +38,7 @@ const gameBoardDisplay = (() => {
     fieldList.forEach(field => {
         field.addEventListener('click', () => {
             field.textContent = playerMarker
+            console.log(Gameboard.getBoard())
         })
     })
 
@@ -81,28 +82,72 @@ const GameController = (() => {
 
     const computerPlay = () => {
         let randomIndex;
+        let numIndex;
+        let randomField
+        let play = false
         
         do {
-            randomIndex = Math.floor(Math.random * 9)
-        } while (Gameboard.getBoard()[randomIndex] === '')
+            randomIndex = Math.floor(Math.random() * 9)
+            randomField = document.querySelector(`[data-field="${randomIndex}"]`)
+            if (Gameboard.getBoard()[randomIndex] === '' && randomField.textContent === ''){
+                play = true
+            }
+        } while(!play)
 
-        const field = fieldList[randomIndex]
-        field.textContent = computerMarker
-
-        Gameboard.updateBoard(randomIndex,computerMarker)
-
-        if (GameController.checkWin(computerMarker)){
-            alert('Computer Wins')
-        }
-        else if (Gameboard.getBoard().every((marker) => marker !== '')){
-            alert('Its a Tie')
-        }
-        else {
-            currentPlayer = GameController.humanPlayer
+        if(play){
+            
+            numIndex = parseInt(randomIndex)    
+            console.log(numIndex)
+    
+            const field = document.querySelector(`[data-field="${numIndex}"]`);
+            field.textContent = computerMarker
+    
+            Gameboard.updateBoard(numIndex,computerMarker)
+    
+            if (checkWin(computerMarker)){
+                alert('Computer Wins')
+            }
+            else if (Gameboard.getBoard().every((marker) => marker !== '')){
+                alert('Its a Tie')
+            }
+            else {
+                currentPlayer = GameController.humanPlayer
+            }
+            
+            play = true
         }
     }
 
-    return {humanPlayer, computerPlayer, computerPlay, checkWin}
+    const humanPlay = (e) => {
+        let index = e.target.getAttribute('data-field')
+        console.log(Gameboard.getBoard())
+
+        if (Gameboard.updateBoard(index, playerMarker) && !gameOver){
+            if (checkWin(playerMarker)){
+                alert('Player Wins')
+            }
+            else if (Gameboard.getBoard().every((marker) => marker !== '')){
+                alert('Its a Tie')
+            }
+            else {
+                currentPlayer = GameController.computerPlayer
+                computerPlay()
+            }
+        }
+    }
+
+    const start = () => {
+        fieldList.forEach(field => {
+            field.addEventListener('click', humanPlay)
+        })
+    }
+
+    const reset = () => {
+        gameBoardDisplay.clearBoard()
+        Gameboard.resetBoard();
+    }
+
+    return {start, reset, humanPlayer, computerPlayer}
 
 })()
 
@@ -125,3 +170,5 @@ const Gameboard = (() => {
 
     return {getBoard, updateBoard, resetBoard}
 })()
+
+GameController.start()
