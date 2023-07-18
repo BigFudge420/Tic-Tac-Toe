@@ -3,6 +3,11 @@ const markerBtnX = document.getElementById('x')
 const markerBtnO = document.getElementById('o')
 const fieldList = document.querySelectorAll('.field')
 const resetBtn = document.getElementById('resetBtn')
+const resultPopup = document.querySelector('.resultPopup')
+const closePopup = document.querySelector('.closeButton')
+const overlay = document.getElementById('overlay')
+const popupTitle = document.querySelector('.popupTitle')
+const popupBody = document.querySelector('.popupBody')
 let playerMarker
 let computerMarker
 let gameOver
@@ -31,6 +36,12 @@ markerBtnO.addEventListener('click', () => {
     currentPlayer = GameController.computerPlayer
     markerBtnO.classList.add('active')
     markerBtnX.classList.remove('active')
+    GameController.computerPlay()
+})
+
+closePopup.addEventListener('click', () => {
+    resultPopup.classList.remove('active')
+    overlay.classList.remove('active')
 })
 
 const gameBoardDisplay = (() => {
@@ -105,10 +116,16 @@ const GameController = (() => {
             Gameboard.updateBoard(numIndex,computerMarker)
     
             if (checkWin(computerMarker)){
-                alert('Computer Wins')
+                popupTitle.textContent = "A Valiant Effort"
+                popupBody.textContent = "You put up a valiant effort, but unfortunately, the computer emerged victorious in the game of Tic Tac Toe. Its algorithmic precision and strategic prowess proved too formidable for you to overcome. Don't be disheartened, though, as every defeat is an opportunity to learn and grow. Keep honing your skills, and your next encounter with the computer will surely be a different story. Keep your head up and keep striving for victory!"
+                resultPopup.classList.add('active')
+                overlay.classList.add('active')
             }
             else if (Gameboard.getBoard().every((marker) => marker !== '')){
-                alert('Its a Tie')
+                popupTitle.textContent = "An Unyielding Battle of Wits"
+                popupBody.textContent = "You and the computer engaged in a fierce battle of wits, with neither side able to claim superiority. This result serves as a testament to your ability to challenge and match the computational prowess of the machine. Take pride in the fact that you have held your own against this formidable opponent, proving that human intellect can hold its ground in the face of artificial intelligence. Well played!"
+                resultPopup.classList.add('active')
+                overlay.classList.add('active')
             }
             else {
                 currentPlayer = GameController.humanPlayer
@@ -124,10 +141,16 @@ const GameController = (() => {
 
         if (Gameboard.updateBoard(index, playerMarker) && !gameOver){
             if (checkWin(playerMarker)){
-                alert('Player Wins')
+                popupTitle.textContent = "Your Brilliance Prevails"
+                popupBody.textContent = "Your strategic brilliance and adaptability outmatched the computer's algorithms, leaving it in a state of defeat. Your skillful maneuvers and well-calculated moves have proven that human ingenuity can still conquer the realm of artificial intelligence. Revel in this accomplishment, knowing that you have conquered the digital realm and emerged as the ultimate victor. Well done!"
+                resultPopup.classList.add('active')
+                overlay.classList.add('active')
             }
             else if (Gameboard.getBoard().every((marker) => marker !== '')){
-                alert('Its a Tie')
+                popupTitle.textContent = "An Unyielding Battle of Wits"
+                popupBody.textContent = "You and the computer engaged in a fierce battle of wits, with neither side able to claim superiority. This result serves as a testament to your ability to challenge and match the computational prowess of the machine. Take pride in the fact that you have held your own against this formidable opponent, proving that human intellect can hold its ground in the face of artificial intelligence. Well played!"
+                resultPopup.classList.add('active')
+                overlay.classList.add('active')
             }
             else {
                 currentPlayer = GameController.computerPlayer
@@ -147,7 +170,7 @@ const GameController = (() => {
         Gameboard.resetBoard();
     }
 
-    return {start, reset, humanPlayer, computerPlayer}
+    return {start, reset, humanPlayer, computerPlayer, computerPlay, humanPlay}
 
 })()
 
