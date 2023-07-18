@@ -20,8 +20,24 @@ markerBtnO.addEventListener('click', () => {
     markerBtnX.classList.remove('active')
 })
 
-fieldList.forEach(field => {
-    field.addEventListener('click', () => {
-        field.textContent = marker
+const gameBoardDisplay = (() => {
+    
+    fieldList.forEach(field => {
+        field.addEventListener('click', () => {
+            field.textContent = marker
+        })
     })
-})
+
+    const clearBoard = () => {
+        fieldList.forEach(field => {
+            field.textContent = ''
+        })
+    }
+
+    return {clearBoard}
+
+})()
+
+const Player = ( playerName, marker) => {
+    return {playerName, marker}
+}
