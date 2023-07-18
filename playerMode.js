@@ -1,12 +1,11 @@
 const fieldList = document.querySelectorAll('.field')
-const markerBtnX = document.getElementById('x')
-const markerBtnO = document.getElementById('o')
 const resetBtn = document.getElementById('resetBtn')
 const popupTitle = document.querySelector('.popupTitle')
 const popupBody = document.querySelector('.popupBody')
 const resultPopup = document.querySelector('.resultPopup')
 const closePopup = document.querySelector('.closeButton')
 const overlay = document.getElementById('overlay')
+const homePageBtn = document.getElementById('homePageBtn')
 let gameOver = false;
 let currentPlayer;
 let selectedMarker;
@@ -16,19 +15,14 @@ closePopup.addEventListener('click', () => {
     overlay.classList.remove('active')
 })
 
+homePageBtn.addEventListener('click', () => {
+    GameController.reset
+    window.location.href = 'index.html'
+})
+
 
 const gameBoardDisplay = (() => {
     
-    markerBtnX.addEventListener('click', () => {
-        markerBtnX.classList.add('active')
-        markerBtnO.classList.remove('active')
-    })
-    
-    markerBtnO.addEventListener('click', () => {
-        markerBtnO.classList.add('active')
-        markerBtnX.classList.remove('active')
-    })
-        
     fieldList.forEach(field => {
         field.addEventListener('click', () => {
             let index = field.getAttribute('data-field')

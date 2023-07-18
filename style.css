@@ -121,6 +121,7 @@ body{
     border-radius: 10px;
     background-color: white;
     font-weight: bold;
+    margin: 0px 10px;
     font-size: 20px;
     margin-top: 50px;
     width: 200px;
@@ -128,6 +129,22 @@ body{
 }
 
 #resetBtn:hover{
+    box-shadow: 2px 2px 5px black;
+}
+
+#homePageBtn{
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: white;
+    font-weight: bold;
+    margin: 0px 10px;
+    font-size: 20px;
+    margin-top: 50px;
+    width: 200px;
+    height: 40px;
+}
+
+#homePageBtn:hover{
     box-shadow: 2px 2px 5px black;
 }
 
