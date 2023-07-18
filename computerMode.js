@@ -19,6 +19,9 @@ homePageBtn.addEventListener('click', () => {
 
 resetBtn.addEventListener('click', () => {
     GameController.reset()
+    if (playerMarker === 'O'){
+        GameController.computerPlay()
+    }
 })
 
 markerBtnX.addEventListener('click', () => {
@@ -48,7 +51,9 @@ const gameBoardDisplay = (() => {
     
     fieldList.forEach(field => {
         field.addEventListener('click', () => {
-            field.textContent = playerMarker
+            if (!gameOver){
+                field.textContent = playerMarker
+            }
             console.log(Gameboard.getBoard())
         })
     })
@@ -105,7 +110,7 @@ const GameController = (() => {
             }
         } while(!play)
 
-        if(play){
+        if(play && !gameOver){
             
             numIndex = parseInt(randomIndex)    
             console.log(numIndex)
@@ -120,15 +125,18 @@ const GameController = (() => {
                 popupBody.textContent = "You put up a valiant effort, but unfortunately, the computer emerged victorious in the game of Tic Tac Toe. Its algorithmic precision and strategic prowess proved too formidable for you to overcome. Don't be disheartened, though, as every defeat is an opportunity to learn and grow. Keep honing your skills, and your next encounter with the computer will surely be a different story. Keep your head up and keep striving for victory!"
                 resultPopup.classList.add('active')
                 overlay.classList.add('active')
+                gameOver = true
             }
             else if (Gameboard.getBoard().every((marker) => marker !== '')){
                 popupTitle.textContent = "An Unyielding Battle of Wits"
                 popupBody.textContent = "You and the computer engaged in a fierce battle of wits, with neither side able to claim superiority. This result serves as a testament to your ability to challenge and match the computational prowess of the machine. Take pride in the fact that you have held your own against this formidable opponent, proving that human intellect can hold its ground in the face of artificial intelligence. Well played!"
                 resultPopup.classList.add('active')
                 overlay.classList.add('active')
+                gameOver = true
             }
             else {
                 currentPlayer = GameController.humanPlayer
+                gameOver = false
             }
             
             play = true
@@ -145,15 +153,18 @@ const GameController = (() => {
                 popupBody.textContent = "Your strategic brilliance and adaptability outmatched the computer's algorithms, leaving it in a state of defeat. Your skillful maneuvers and well-calculated moves have proven that human ingenuity can still conquer the realm of artificial intelligence. Revel in this accomplishment, knowing that you have conquered the digital realm and emerged as the ultimate victor. Well done!"
                 resultPopup.classList.add('active')
                 overlay.classList.add('active')
+                gameOver = true
             }
             else if (Gameboard.getBoard().every((marker) => marker !== '')){
                 popupTitle.textContent = "An Unyielding Battle of Wits"
                 popupBody.textContent = "You and the computer engaged in a fierce battle of wits, with neither side able to claim superiority. This result serves as a testament to your ability to challenge and match the computational prowess of the machine. Take pride in the fact that you have held your own against this formidable opponent, proving that human intellect can hold its ground in the face of artificial intelligence. Well played!"
                 resultPopup.classList.add('active')
                 overlay.classList.add('active')
+                gameOver = true
             }
             else {
                 currentPlayer = GameController.computerPlayer
+                gameOver = false
                 computerPlay()
             }
         }
@@ -168,6 +179,7 @@ const GameController = (() => {
     const reset = () => {
         gameBoardDisplay.clearBoard()
         Gameboard.resetBoard();
+        gameOver = false
     }
 
     return {start, reset, humanPlayer, computerPlayer, computerPlay, humanPlay}
