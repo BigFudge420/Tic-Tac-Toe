@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,300italic,regular,italic,500,500italic,700,700italic" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <div class="title">
+            <h1 id="title">Tic-Tac-Toe</h1>
+        </div>
+        <div id="gameBoard">
+            <button class="field no-l-t" data-field="0"></button>
+            <button class="field no-t" data-field="1"></button>
+            <button class="field no-r-t" data-field="2"></button>
+            <button class="field no-l" data-field="3"></button>
+            <button class="field all" data-field="4"></button>
+            <button class="field no-r" data-field="5"></button>
+            <button class="field no-l-b" data-field="6"></button>
+            <button class="field no-b" data-field="7"></button>
+            <button class="field no-r-b" data-field="8"></button>
+        </div>
+        <div class="buttons">
+            <button id="resetBtn">Reset</button>
+        </div>
+        <div class="markersContainer">
+            <button id="x" class="markerDiv">X</button>
+            <button id="o" class="markerDiv">O</button>
+        </div>
+        <div class="resultPopup">
+            <div class="popupHeader">
+                <div class="popupTitle"></div>
+                <button class="closeButton" data-popup-close>&times;</button>
+            </div>
+            <div class="popupBody"></div>
+        </div>
+        <div id="overlay"></div>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html>
